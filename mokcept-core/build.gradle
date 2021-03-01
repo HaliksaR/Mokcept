@@ -4,7 +4,7 @@ plugins {
     id 'com.github.dcendents.android-maven'
 }
 
-group = 'com.github.HaliksaR.Mokcept'
+group = 'com.github.haliksar.mokcept'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
