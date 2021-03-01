@@ -1,5 +1,4 @@
-[![](https://jitpack.io/v/HaliksaR/Mokcept.svg)](https://jitpack.io/#HaliksaR/Mokcept)
-
+[![](https://jitpack.io/v/HaliksaR/Mokcept.svg)](https://jitpack.io/#HaliksaR/Mokcept) [![Android CI](https://github.com/HaliksaR/Mokcept/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/HaliksaR/Mokcept/actions/workflows/android.yml)
 
 ## Download
 ```groovy
