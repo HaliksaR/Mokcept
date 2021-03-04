@@ -80,6 +80,80 @@ class GetMethodHandler(private val context: Context) : MethodHandler(Method.GET)
 ```
 
 ### Setup multi module
-TODO
+```kotlin
+OkHttpClient.Builder()
+.addInterceptor(
+    Mokcept(protocol = Protocol.HTTP_2, // default HTTP_2)
+.build()
+```
 ### Example multi module
-TODO
+```kotlin
+internal val MokceptComponent.simpleQuery: (Context) -> Unit
+    get() = { context ->
+        addMock("simpleQuery") {
+            requestWithQuery(
+                method = Method.GET,
+                link = "/api/v1/simpleQuery",
+                key = { it.query }
+            ) { uri ->
+                response("number=1") {
+                    code = 200
+                    message = "first page"
+                    body = context json R.raw.simple_data_first
+                }
+                response("number=2") {
+                    code = 200
+                    message = "second page"
+                    body = context json R.raw.simple_data_second
+                }
+                default {
+                    code = 200
+                    message = "last page"
+                    body = context json R.raw.simple_data_last
+                }
+            }
+        }
+    }
+
+internal val MokceptComponent.simple: (Context) -> Unit
+    get() = { context ->
+        addMock("simple") {
+            request(
+                method = Method.GET,
+                link = "/api/v1/simple"
+            ) { uri ->
+                response {
+                    code = 200
+                    message = "Take SimpleSet"
+                    body = context json R.raw.simple_data
+                }
+            }
+        }
+    }
+
+class DataSourceMultiModuleImpl(
+    private val api: TestApi,
+    context: Context
+) : DataSource {
+
+    init {
+        MokceptComponent.simple(context)
+        MokceptComponent.simpleQuery(context)
+    }
+
+    override suspend fun simple(): SimpleSet =
+        withContext(Dispatchers.IO) {
+            api.simple()
+        }
+
+    override suspend fun simpleQuery(number: Int): List<SimpleSet> =
+        withContext(Dispatchers.IO) {
+            api.simpleQuery(number)
+        }
+}
+
+
+MokceptComponent.clear()
+MokceptComponent.removeMock("simple")
+
+```
