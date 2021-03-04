@@ -3,15 +3,15 @@ package ru.haliksar.mokcept.core
 import okhttp3.Interceptor
 import okhttp3.Protocol
 import okhttp3.Response
-import ru.haliksar.mokcept.core.handler.Method
+import ru.haliksar.mokcept.core.api.CONTENT_TYPE
+import ru.haliksar.mokcept.core.api.MEDIA_TYPE_JSON
+import ru.haliksar.mokcept.core.api.Method
+import ru.haliksar.mokcept.core.api.enumValueOrNull
 import ru.haliksar.mokcept.core.handler.MethodHandler
-import ru.haliksar.mokcept.core.handler.enumValueOrNull
 import ru.haliksar.mokcept.core.request.MokceptRequest
 import ru.haliksar.mokcept.core.dsl.response404
 import java.net.URI
 
-internal const val CONTENT_TYPE = "content-type"
-internal const val MEDIA_TYPE_JSON = "application/json"
 
 class Mokcept(
     private val protocol: Protocol = Protocol.HTTP_2,

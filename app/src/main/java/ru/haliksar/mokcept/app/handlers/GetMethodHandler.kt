@@ -3,8 +3,8 @@ package ru.haliksar.mokcept.app.handlers
 import android.content.Context
 import ru.haliksar.mokcept.android.ext.json
 import ru.haliksar.mokcept.app.R
+import ru.haliksar.mokcept.core.api.Method
 import ru.haliksar.mokcept.core.dsl.*
-import ru.haliksar.mokcept.core.handler.Method
 import ru.haliksar.mokcept.core.handler.MethodHandler
 
 class GetMethodHandler(private val context: Context) : MethodHandler(Method.GET) {

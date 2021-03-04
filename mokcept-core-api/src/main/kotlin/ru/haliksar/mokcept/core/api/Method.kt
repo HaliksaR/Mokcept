@@ -1,6 +1,6 @@
 @file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 
-package ru.haliksar.mokcept.core.handler
+package ru.haliksar.mokcept.core.api
 
 enum class Method {
     GET,

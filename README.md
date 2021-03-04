@@ -13,20 +13,23 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    def libsuVersion = '0.0.1'
+    def libVersion = '0.0.1-alpha'
 
-    // The core
-    implementation "com.github.haliksar.mokcept:mokcept-core:$libsuVersion"
+    // The core base
+    implementation "com.github.haliksar.mokcept:mokcept-core:$libVersion"
+
+    // The core multimodule
+    implementation "com.github.haliksar.mokcept:mokcept-multimodule-core:$libVersion"
 
     // Optional
-    implementation "com.github.haliksar.mokcept:mokcept-android-ext:$libsuVersion"
+    implementation "com.github.haliksar.mokcept:mokcept-android-ext:$libVersion"
 }
 ```
 
 
 ## Guide
 
-### Setup
+### Setup base
 ```kotlin
 OkHttpClient.Builder()
 .addInterceptor(
@@ -41,7 +44,7 @@ OkHttpClient.Builder()
 .build()
 ```
 
-### Example Handler
+### Example base Handler
 
 ```kotlin
 class GetMethodHandler(private val context: Context) : MethodHandler(Method.GET) {
@@ -75,3 +78,8 @@ class GetMethodHandler(private val context: Context) : MethodHandler(Method.GET)
     }
 }
 ```
+
+### Setup multi module
+TODO
+### Example multi module
+TODO

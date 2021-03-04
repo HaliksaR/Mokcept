@@ -1,5 +1,6 @@
 package ru.haliksar.mokcept.core.handler
 
+import ru.haliksar.mokcept.core.api.Method
 import ru.haliksar.mokcept.core.request.MokceptRequest
 
 

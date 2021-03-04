@@ -3,14 +3,13 @@ package ru.haliksar.mokcept.core.dsl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
-import ru.haliksar.mokcept.core.MEDIA_TYPE_JSON
+import ru.haliksar.mokcept.core.api.MEDIA_TYPE_JSON
+import ru.haliksar.mokcept.core.api.MokceptDsl
+import ru.haliksar.mokcept.core.api.MokceptResponse
+import ru.haliksar.mokcept.core.api.RESPONSE_404
 import ru.haliksar.mokcept.core.handler.MethodHandler
 import ru.haliksar.mokcept.core.request.MokceptRequest
-import ru.haliksar.mokcept.core.response.MokceptResponse
 import java.net.URI
-
-@DslMarker
-annotation class MokceptDsl
 
 typealias MokceptResponseBuilder = MokceptResponse.() -> Unit
 typealias MokceptResponsesBuilder = MokceptResponses.() -> Unit
@@ -59,7 +58,8 @@ fun Response.Builder.response(
 @MokceptDsl
 fun Response.Builder.response404() =
     response {
-        code = 404
-        message = "NOT_FOUND"
-        body = """{ "error": "NOT API" }"""
+        code = RESPONSE_404.code
+        message = RESPONSE_404.message
+        body = RESPONSE_404.body
+        protocol = RESPONSE_404.protocol
     }

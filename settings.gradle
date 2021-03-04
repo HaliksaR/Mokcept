@@ -1,4 +1,6 @@
 rootProject.name = "Mokcept"
 include ':app'
+include ':mokcept-core-api'
 include ':mokcept-core'
 include ':mokcept-android-ext'
+include ':mokcept-multimodule-core'

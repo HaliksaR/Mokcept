@@ -10,6 +10,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -17,11 +18,12 @@ import ru.haliksar.mokcept.app.handlers.GetMethodHandler
 import ru.haliksar.mokcept.app.handlers.PostMethodHandler
 import ru.haliksar.mokcept.core.Mokcept
 import java.io.IOException
+import ru.haliksar.mokcept.multimodule.core.Mokcept as MultimoduleMokcept
 
 
 val FakeNetworkModule = module {
 
-    factory {
+    factory(named(BASE)) {
         provideOkHttpClient(
             interceptors = listOf(
                 Mokcept(
@@ -36,7 +38,24 @@ val FakeNetworkModule = module {
         )
     }
 
-    factory {
+    factory(named(BASE)) {
+        provideRetrofit(
+            moshi = Moshi.Builder().build(),
+            okHttpClient = get(),
+            url = "https://www.haliksar.fun"
+        )
+    }
+
+    factory(named(MULTI_MODULE)) {
+        provideOkHttpClient(
+            interceptors = listOf(
+                MultimoduleMokcept(protocol = Protocol.HTTP_2),
+                noConnectionInterceptor(androidContext())
+            )
+        )
+    }
+
+    factory(named(MULTI_MODULE)) {
         provideRetrofit(
             moshi = Moshi.Builder().build(),
             okHttpClient = get(),

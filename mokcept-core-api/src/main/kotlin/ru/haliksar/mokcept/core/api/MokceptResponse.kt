@@ -1,4 +1,4 @@
-package ru.haliksar.mokcept.core.response
+package ru.haliksar.mokcept.core.api
 
 import okhttp3.Protocol
 
@@ -11,4 +11,10 @@ data class MokceptResponse(
     var message: String = DEFAULT_MESSAGE,
     var body: String = DEFAULT_BODY,
     var protocol: Protocol = Protocol.HTTP_2
+)
+
+val RESPONSE_404 = MokceptResponse(
+    code = 404,
+    message = "NOT_FOUND",
+    body = """{ "error": "NOT API" }"""
 )
